@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">My Application 2</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_settings">Settings</string>
+    <string name="welcome">AnB Timekeeper</string>
+    <string name="str_iv_flag">Flag</string>
+    <string name="app_name">AnB Android</string>
+    <string name="remember_text">Auto Sign in</string>
+    <string name="username_text">Enter Username</string>
+    <string name="password_text">Enter Password</string>
+    <string name="select_all">Select All</string>
+    <string name="unselect_all">Unselect All</string>
+    <string name="approve">Approve</string>
+    <string name="back">Back</string>
+    <string name="purchase_order">Purchase Order</string>
+    <string name="settings">Settings</string>
+    <string name="settings_off">Select Auto Sign-0n when you Login again</string>
+    <string name="settings_on">UnSelect to disable Auto Sign-0n</string>
+    <string name="logout">Logout</string>
+    <string name="previous_item">Prev Item</string>
+    <string name="next_item">Next Item</string>
+    <string name="comment_text">Comments for Approve or Reject PO</string>
+    <string name="support">Support Request</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="email">Back to Email</string>
+    <string name="approvals">Approvals</string>
+    <string name="reject">Reject</string>
+    <string name="cancel">Cancel</string>
+    <string name="blankspace">           </string>
+    <string name="type">DayCode</string>
+    <string name="projCode">pCode</string>
+    <string name="paytrm">pTerm</string>
+    <string name="sHrs">sHrs</string>
+    <string name="wHrs">wHrs</string>
+
+</resources>

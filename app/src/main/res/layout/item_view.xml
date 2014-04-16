@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/item_icon"
+        android:src="@drawable/bug"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:maxWidth="80dp"
+        android:longClickable="false"
+        android:maxHeight="80dp"
+        android:adjustViewBounds="true"
+        android:minHeight="80dp"
+        android:minWidth="80dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Song"
+        android:id="@+id/item_Title"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/item_icon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Artist"
+        android:id="@+id/item_Artistid"
+        android:layout_below="@+id/item_Title"
+        android:layout_toRightOf="@+id/item_icon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Lwtd"
+        android:id="@+id/item_lwtd"
+        android:layout_alignBottom="@+id/item_icon"
+        android:layout_toRightOf="@+id/item_icon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Rtd"
+        android:id="@+id/item_rtd"
+        android:layout_marginLeft="55dp"
+        android:layout_alignTop="@+id/item_lwtd"
+        android:layout_toRightOf="@+id/item_lwtd" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Wtd"
+        android:id="@+id/item_wtd"
+        android:layout_marginLeft="55dp"
+        android:layout_alignTop="@+id/item_rtd"
+        android:layout_toRightOf="@+id/item_rtd"  />
+
+
+</RelativeLayout>

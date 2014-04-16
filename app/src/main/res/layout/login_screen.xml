@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/logintreebackground"
+    android:orientation="vertical"
+    android:paddingLeft="30dp" >
+
+	<ImageView
+	    android:id="@+id/imageView1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginBottom="6dp"
+	    android:paddingLeft="50dp"
+	    android:src="@drawable/anblogo" >
+</ImageView>
+   <TableLayout
+		    android:id="@+id/TableLayout01"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content" >
+
+		    <TableRow >
+    <EditText
+        android:singleLine="true"
+        android:id="@+id/txt_userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:autoText="false"
+        android:hint="@string/username_text"
+        android:maxLength="12" >
+
+</EditText>
+ </TableRow>
+ <TableRow >
+    <EditText
+     android:singleLine="true"
+        android:id="@+id/txt_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:autoText="false"
+        android:hint="@string/password_text"
+        android:maxLength="12"
+        android:password="true" >
+
+</EditText>
+ </TableRow>
+ </TableLayout>
+   <!-- <EditText android:id="@+id/txt_password" 
+				android:layout_width="169dp" android:layout_height="wrap_content"
+				android:layout_marginTop="5dp" android:layout_marginBottom="5dp" android:maxLength="12"
+				android:autoText="false"
+				android:hint="@string/password_text" android:password="true"></EditText> --> 
+    
+		<TableLayout
+		    android:id="@+id/TableLayout01"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content" >
+
+		    <TableRow >
+		        <ImageButton android:id="@+id/loginButton" 
+						android:src="@drawable/loginbutton"  android:layout_width="76dp"
+						android:layout_height="31dp" android:layout_marginTop="5dp"
+						android:layout_marginBottom="5dp"></ImageButton>
+				<TextView android:layout_width="wrap_content" android:layout_marginTop="6dp"
+						android:layout_height="wrap_content" android:layout_marginLeft="15dp"
+						android:textColor="#000000" android:textStyle="bold"
+						android:layout_marginRight="3dp" android:text="@string/remember_text"></TextView> 
+					 <CheckBox  android:id="@+id/chk_autoSignIn" android:layout_marginTop="2dp"
+						android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox> 
+		    </TableRow>
+		    
+		</TableLayout>		
+	<!--  <TableLayout android:id="@+id/TableLayout01"
+		android:layout_width="225dp" android:layout_height="wrap_content"
+		android:stretchColumns="0" android:layout_marginLeft="48dp"
+		android:layout_marginTop="30dp">
+		<TableRow>
+			<ImageView android:id="@+id/imageView1" android:layout_height="wrap_content" android:src="@drawable/anblogo" android:layout_width="wrap_content" android:layout_marginBottom="6dp"></ImageView>
+		</TableRow>
+		<TableRow>
+			<EditText android:id="@+id/txt_userName" android:autoText="false"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_marginTop="5dp" android:layout_marginBottom="5dp" android:maxLength="12"
+				android:hint="@string/username_text"></EditText>
+		</TableRow>
+		<TableRow>
+			<EditText android:id="@+id/txt_password" android:autoText="false"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_marginTop="5dp" android:layout_marginBottom="5dp" android:maxLength="12"
+				android:hint="@string/password_text" android:password="true"></EditText>
+		</TableRow>
+		<TableRow>
+			<TableLayout android:id="@+id/TableLayout02"
+				android:layout_width="220dp" android:layout_height="fill_parent"
+				android:stretchColumns="0" android:layout_marginLeft="5dp" >
+				<TableRow>
+					<ImageButton android:id="@+id/btn_login" 
+						android:src="@drawable/loginbutton"  android:layout_width="76dp"
+						android:layout_height="31dp" android:layout_marginTop="5dp"
+						android:layout_marginBottom="5dp"></ImageButton>
+					<TextView android:layout_width="wrap_content" android:layout_marginTop="6dp"
+						android:layout_height="wrap_content" android:layout_marginLeft="15dp"
+						android:textColor="#000000" android:textStyle="bold"
+						android:layout_marginRight="3dp" android:text="@string/remember_text"></TextView>
+					<CheckBox android:text="@+id/CheckBox01" android:id="@+id/chk_autoSignIn" android:layout_marginTop="5dp"
+						android:layout_width="42dp" android:layout_height="35dp"></CheckBox>
+				</TableRow>
+			</TableLayout>
+		</TableRow>
+	</TableLayout>	-->
+</LinearLayout>
