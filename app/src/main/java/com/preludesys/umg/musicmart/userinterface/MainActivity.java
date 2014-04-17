@@ -30,7 +30,7 @@ import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
-    public List<SalesRecord> mySongs= new ArrayList<SalesRecord>();
+    public static List<SalesRecord> mySongs= new ArrayList<SalesRecord>();
     httpJson json = new httpJson();
     private String url = "http://jay-preludesys-mac.local:8080/umg-musicmart-web-services/rest/salesrecord/1?deviceId=B15391CD13774F7D843FCCA3D230CF36FFFFFFFF";
 
