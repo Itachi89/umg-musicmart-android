@@ -1,5 +1,7 @@
 package com.preludesys.umg.musicmart.model;
 
+import java.util.List;
+
 /**
  * Created by varunsundaramoorthy on 4/11/14.
  */
@@ -17,6 +19,17 @@ public class SalesRecord extends AbstractDomain {
     private String imageUrl;
     private String label;
     private String configId;
+    private List<Link> links;
+
+    public List<Link> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<Link> links) {
+        this.links = links;
+    }
+
+
 
     public String getArtistId() {
         return artistId;
@@ -84,4 +97,6 @@ public class SalesRecord extends AbstractDomain {
     public void setLabel(String label) {
         this.label = label;
     }
+
+
 }

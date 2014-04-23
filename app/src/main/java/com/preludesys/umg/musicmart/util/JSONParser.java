@@ -2,6 +2,8 @@ package com.preludesys.umg.musicmart.util;
 
 import android.util.Log;
 
+import com.preludesys.umg.musicmart.model.SalesRecord;
+
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -15,12 +17,12 @@ import java.util.List;
 
 public class JSONParser<T> {
 
-   public List<T> parse(String jsonValue){
+   public List<SalesRecord> parse(String jsonValue){
        ObjectMapper mapper = new ObjectMapper();
-       List<T> myList = new ArrayList<T>();
+       List<SalesRecord> myList = new ArrayList<SalesRecord>();
        try {
-           TypeReference<List<T>> typeRef = new TypeReference<List<T>>(){};
-            myList = mapper.readValue(jsonValue, typeRef);
+           TypeReference<List<SalesRecord>> typeRef = new TypeReference<List<SalesRecord>>(){};
+           myList = mapper.readValue(jsonValue, typeRef);
            Log.d(this.getClass().toString(), ">>>>>>>>> JSONParser value  " + myList.get(0).getClass() );
 
         } catch (JsonGenerationException e) {

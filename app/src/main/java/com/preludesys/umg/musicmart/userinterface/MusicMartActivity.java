@@ -1,37 +1,39 @@
 package com.preludesys.umg.musicmart.userinterface;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 
 import com.preludesys.umg.musicmart.MusicMartApplication;
+import com.preludesys.umg.musicmart.listener.PostTaskExecuteListener;
 import com.preludesys.umg.musicmart.listener.TaskProgressListener;
 
 
-public abstract class MusicMartActivity extends Activity {
+public abstract class MusicMartActivity extends ActionBarActivity {
 	public static final String PREFS_NAME = "MyPrefFile";
 		
 	public MusicMartApplication getMusicMartApplication(){
 		return (MusicMartApplication) getApplication();
 	}
 
-	protected TaskProgressListener getTaskProgressListener(){
+	public TaskProgressListener getTaskProgressListener(){
 		TaskProgressListener taskProgessListener = new TaskProgressListener() {
 			private ProgressDialog dialog;
 			@Override
 			public void setProgressDialog(ProgressDialog dialog) {
-				System.out.println(">>>>>> Inside Set Progress Dialog ");
+				Log.d(this.getClass().toString(), ">>>>>> Inside Set Progress Dialog ");
 				this.dialog = dialog;
 			}
 			
 			@Override
 			public void beginProgress() {
-				System.out.println(">>>>>>>>> Begin Progress Dialog ");
+				Log.d(this.getClass().toString(), ">>>>>>>>> Begin Progress Dialog ");
 				dialog.show();
 			}
 			
 			@Override
 			public void endProgress() {
-				System.out.println(">>>>>>>>> End Progress Dialog ");
+				Log.d(this.getClass().toString(), ">>>>>>>>> End Progress Dialog ");
 				dialog.dismiss();
 			}
 		};
@@ -43,5 +45,8 @@ public abstract class MusicMartActivity extends Activity {
 		taskProgessListener.setProgressDialog(progressDialog);
 		return taskProgessListener;
 	}
+
+
+    public abstract PostTaskExecuteListener getPostTaskExecutionListener();
 	
 }

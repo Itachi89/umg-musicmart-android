@@ -18,8 +18,6 @@ import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import org.apache.http.NameValuePair;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -697,10 +695,6 @@ public final class UrlImageViewHelper {
         mDownloaders.add(mContactDownloader);
         mDownloaders.add(mContentDownloader);
         mDownloaders.add(mFileDownloader);
-    }
-    
-    public static interface RequestPropertiesCallback {
-        public ArrayList<NameValuePair> getHeadersForRequest(Context context, String url);
     }
 
     private static RequestPropertiesCallback mRequestPropertiesCallback;

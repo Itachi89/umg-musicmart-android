@@ -2,6 +2,7 @@ package com.preludesys.umg.musicmart.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,25 +16,31 @@ import com.preludesys.umg.musicmart.model.SalesRecord;
 import java.util.List;
 
 
-public class SalesRecordAdapter extends ArrayAdapter<SalesRecord> {
+public class SalesRecordAdapter extends  ArrayAdapter<SalesRecord> {
 	Context context;
 	int layoutResourceId;
-	List<SalesRecord> mySongs;
+	List<SalesRecord> myList;
 
-	public SalesRecordAdapter(Context context, int layoutResourceId, List<SalesRecord> mySongs) {
-		super(context, layoutResourceId, mySongs);
-		System.out.println(">>>>>> Inside SalesRecordAdapter: ");
+	public SalesRecordAdapter(Context context, int layoutResourceId, List<SalesRecord> myList) {
+		super(context, layoutResourceId, myList);
+		Log.d(this.getClass().toString(),">>>>>> Inside SalesRecordAdapter: ");
 		this.layoutResourceId = layoutResourceId;
 		this.context = context;
-		System.out.println(">>>>>> SalesRecordAdapter item Size: " + mySongs.size());
-		this.mySongs = mySongs;
+		this.myList = myList;
 	}
 
-	@Override
+    public SalesRecordAdapter(Context context, int layoutResourceId) {
+        super(context, layoutResourceId);
+        Log.d(this.getClass().toString(),">>>>>> Inside SalesRecordAdapter: ");
+        this.layoutResourceId = layoutResourceId;
+        this.context = context;
+    }
+
+    @Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View row = convertView;
 		MusicMartViewHolder holder = null;
-
+        Log.d(this.getClass().toString(), ">>>>>>>>>>>> Inside Get View");
 		if (row == null) {
 			LayoutInflater inflater = ((Activity) context).getLayoutInflater();
 			row = inflater.inflate(layoutResourceId, parent, false);
@@ -49,11 +56,12 @@ public class SalesRecordAdapter extends ArrayAdapter<SalesRecord> {
 			holder = (MusicMartViewHolder) row.getTag();
 		}
 
-		SalesRecord currentSong = mySongs.get(position);
+        Log.d(this.getClass().toString(), ">>>>> ############################## View Position: " +  position);
+		SalesRecord currentSong = myList.get(position);
 		
 		
 		//String imagePath = ApplicationProperties.getBaseUrl() + currentSong.getImageUrl();
-		//System.out.println(">>>>> Image Path: " +  imagePath);
+		//Log.d(">>>>> Image Path: " +  imagePath);
 		//UrlImageViewHelper.setUrlDrawable(holder.image, imagePath, null, UrlImageViewHelper.CACHE_DURATION_ONE_DAY);
         holder.image.setImageResource(R.drawable.bug);
         holder.titleText.setText(currentSong.getTitle());

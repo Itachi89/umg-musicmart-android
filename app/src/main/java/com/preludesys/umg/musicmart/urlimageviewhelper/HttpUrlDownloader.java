@@ -3,14 +3,13 @@ package com.preludesys.umg.musicmart.urlimageviewhelper;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.preludesys.anb.urlimageviewhelper.UrlImageViewHelper.RequestPropertiesCallback;
-
 import org.apache.http.NameValuePair;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+
 
 public class HttpUrlDownloader implements UrlDownloader {
     private RequestPropertiesCallback mRequestPropertiesCallback;
