@@ -15,7 +15,7 @@ import com.preludesys.umg.musicmart.R;
 import com.preludesys.umg.musicmart.adapter.SalesRecordAdapter;
 import com.preludesys.umg.musicmart.listener.PostTaskExecuteListener;
 import com.preludesys.umg.musicmart.model.SalesRecord;
-import com.preludesys.umg.musicmart.task.LoadMoreListTask;
+import com.preludesys.umg.musicmart.task.SalesRecordListTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +29,7 @@ public class ListScreen extends MusicMartActivity {
 	String title;
 	String searchString;
     public long offset=0;
+    int newPosition =0;
     //String deviceId =Secure.getString(this.getContentResolver(),Secure.ANDROID_ID);
 
 	@Override
@@ -39,7 +40,7 @@ public class ListScreen extends MusicMartActivity {
         final Button btnLoadMore = new Button(this);
         btnLoadMore.setText("Load More");
         ListView listView = (ListView) findViewById(R.id.txtSongs);
-        new LoadMoreListTask(listScreen).execute(offset);
+        new SalesRecordListTask(listScreen).execute(offset);
 
         listView.addFooterView(btnLoadMore);
         btnLoadMore.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +49,7 @@ public class ListScreen extends MusicMartActivity {
                 // Starting a new async task
 
                 offset=offset+20;
-                new LoadMoreListTask(listScreen).execute(offset);
+                new SalesRecordListTask(listScreen).execute(offset);
             }
         });
      }
@@ -57,11 +58,17 @@ public class ListScreen extends MusicMartActivity {
         return new PostTaskExecuteListener<List<SalesRecord>>() {
             public void performOperation(List<SalesRecord> items) {
                 try{
+
                     salesRecordItems.addAll(items);
                     Log.d(this.getClass().toString(),">>>>>>>>>>>>>>>>>> Inside performOperation");
                     SalesRecordAdapter salesRecordAdapter = new SalesRecordAdapter(listScreen, R.layout.item_view, salesRecordItems);
                     ListView listView = (ListView) findViewById(R.id.txtSongs);
                     listView.setAdapter(salesRecordAdapter);
+                    int currentPosition = listView.getFirstVisiblePosition();
+                    newPosition = currentPosition+newPosition;
+
+                    newPosition=newPosition+20;
+                    listView.setSelectionFromTop(newPosition-20,0);
                 }
                 catch (Exception e) {
                     Log.d(this.getClass().toString(), "Error in Home Listener : " + e);

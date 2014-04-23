@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.preludesys.umg.musicmart.R;
 import com.preludesys.umg.musicmart.model.SalesRecord;
+import com.preludesys.umg.musicmart.urlimageviewhelper.UrlImageViewHelper;
 
 import java.util.List;
 
@@ -20,6 +21,10 @@ public class SalesRecordAdapter extends  ArrayAdapter<SalesRecord> {
 	Context context;
 	int layoutResourceId;
 	List<SalesRecord> myList;
+    double x;
+    double y;
+
+
 
 	public SalesRecordAdapter(Context context, int layoutResourceId, List<SalesRecord> myList) {
 		super(context, layoutResourceId, myList);
@@ -58,17 +63,19 @@ public class SalesRecordAdapter extends  ArrayAdapter<SalesRecord> {
 
         Log.d(this.getClass().toString(), ">>>>> ############################## View Position: " +  position);
 		SalesRecord currentSong = myList.get(position);
-		
-		
-		//String imagePath = ApplicationProperties.getBaseUrl() + currentSong.getImageUrl();
-		//Log.d(">>>>> Image Path: " +  imagePath);
-		//UrlImageViewHelper.setUrlDrawable(holder.image, imagePath, null, UrlImageViewHelper.CACHE_DURATION_ONE_DAY);
-        holder.image.setImageResource(R.drawable.bug);
+		x=(double)(Integer.parseInt(currentSong.getWtd()));
+        y=(double)(Integer.parseInt(currentSong.getLwtd()));
+        int var= (int)Math.round(((x-y)/y)*100);
+
+
+        String imagePath = currentSong.getImageUrl();
+		Log.d(this.getClass().toString(),">>>>> Image Path: " +  imagePath);
+		UrlImageViewHelper.setUrlDrawable(holder.image, imagePath, null, UrlImageViewHelper.CACHE_DURATION_ONE_DAY);
         holder.titleText.setText(currentSong.getTitle());
 		holder.artistText.setText(currentSong.getArtistId());
 		holder.lwtdText.setText(currentSong.getLwtd());
 		holder.wtdText.setText(currentSong.getWtd());
-		holder.rtdText.setText(currentSong.getRtd());
+		holder.rtdText.setText(var+"%");
 		return row;
 	}
 

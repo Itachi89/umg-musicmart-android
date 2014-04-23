@@ -19,19 +19,21 @@
         android:minWidth="80dp" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Song"
+        android:textSize="13dp"
         android:id="@+id/item_Title"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/item_icon" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Artist"
+        android:textSize="10dp"
         android:id="@+id/item_Artistid"
         android:layout_below="@+id/item_Title"
         android:layout_toRightOf="@+id/item_icon" />
@@ -40,8 +42,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Lwtd"
-        android:id="@+id/item_lwtd"
+        android:textSize="13dp"
+
+        android:text="Wtd"
+        android:id="@+id/item_wtd"
         android:layout_alignBottom="@+id/item_icon"
         android:layout_toRightOf="@+id/item_icon" />
 
@@ -49,21 +53,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Rtd"
-        android:id="@+id/item_rtd"
+        android:textSize="13dp"
+
+        android:text="Lwtd"
+        android:id="@+id/item_lwtd"
         android:layout_marginLeft="55dp"
-        android:layout_alignTop="@+id/item_lwtd"
-        android:layout_toRightOf="@+id/item_lwtd" />
+        android:layout_alignTop="@+id/item_wtd"
+        android:layout_toRightOf="@+id/item_wtd" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Wtd"
-        android:id="@+id/item_wtd"
+        android:textSize="13dp"
+
+        android:text="Rtd"
+        android:id="@+id/item_rtd"
         android:layout_marginLeft="55dp"
-        android:layout_alignTop="@+id/item_rtd"
-        android:layout_toRightOf="@+id/item_rtd"  />
+        android:layout_alignTop="@+id/item_lwtd"
+        android:layout_toRightOf="@+id/item_lwtd"  />
 
 
 </RelativeLayout>

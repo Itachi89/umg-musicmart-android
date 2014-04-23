@@ -5,8 +5,8 @@ package com.preludesys.umg.musicmart.task;
 import android.util.Base64;
 import android.util.Log;
 
-import com.preludesys.umg.musicmart.MusicMartApplication;
 import com.preludesys.umg.musicmart.model.SalesRecord;
+import com.preludesys.umg.musicmart.userinterface.MusicMartActivity;
 import com.preludesys.umg.musicmart.util.JSONParser;
 
 import org.apache.http.HttpEntity;
@@ -21,26 +21,30 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-public class SalesRecordListTask extends MusicMartAsyncTask<String, Void, List<SalesRecord>> {
+public class SalesRecordListTask extends MusicMartAsyncTask<Long, Void, List<SalesRecord>> {
 
-	public SalesRecordListTask(MusicMartApplication application) {
-		super(application);
-		// TODO Auto-generated constructor stub
-	}
+    private MusicMartActivity activity;
 
-	@Override
-	protected List<SalesRecord> doInBackground(String... parameters) {
-		System.out.println(">>>>>>Inside SalesRecordListTask - doInBackground");
-		List<SalesRecord> itemList = null;
+    public SalesRecordListTask(MusicMartActivity activity) {
+        super(activity.getMusicMartApplication());
+        this.activity = activity;
+        setTaskProgressListener(activity.getTaskProgressListener());
+        setPostTaskExecuteListener(activity.getPostTaskExecutionListener());
+        // TODO Auto-generated constructor stub
+    }
+
+    @Override
+    protected List<SalesRecord> doInBackground(Long... parameters) {
+        System.out.println(">>>>>>Inside SalesRecordListTask - doInBackground");
+        List<SalesRecord> itemList = null;
         String username = "restclient";
         String password = "D3Rfg$gbmi^1Ydv3f*B";
         String unp = username+":"+password;
         String result = new String();
-        //String deviceId =parameters[0];
+        long offset =parameters[0];
 
-        String url= "http://192.168.1.14:8080/umg-musicmart-web-services/rest/salesrecord/search?offset=0&limit=20&searchTerm=*&deviceId=5D26E4C6915A4301A08369348698A620FFFFFFFF";
+        String url= "http://192.168.1.14:8080/umg-musicmart-web-services/rest/salesrecord/search?offset="+offset+"&limit=20&searchTerm=eminem&deviceId=5D26E4C6915A4301A08369348698A620FFFFFFFF";
         Log.d("urls", "url: " + url);
-
 
 
         InputStream is = null;
@@ -74,6 +78,6 @@ public class SalesRecordListTask extends MusicMartAsyncTask<String, Void, List<S
         JSONParser<SalesRecord> parser = new JSONParser<SalesRecord>();
 
         return parser.parse(result);
-	}
+    }
 
 }
