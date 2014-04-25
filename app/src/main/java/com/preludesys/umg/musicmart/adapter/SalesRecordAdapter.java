@@ -25,7 +25,6 @@ public class SalesRecordAdapter extends  ArrayAdapter<SalesRecord> {
     double y;
 
 
-
 	public SalesRecordAdapter(Context context, int layoutResourceId, List<SalesRecord> myList) {
 		super(context, layoutResourceId, myList);
 		Log.d(this.getClass().toString(),">>>>>> Inside SalesRecordAdapter: ");
@@ -40,6 +39,8 @@ public class SalesRecordAdapter extends  ArrayAdapter<SalesRecord> {
         this.layoutResourceId = layoutResourceId;
         this.context = context;
     }
+
+
 
     @Override
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -60,22 +61,28 @@ public class SalesRecordAdapter extends  ArrayAdapter<SalesRecord> {
 		} else {
 			holder = (MusicMartViewHolder) row.getTag();
 		}
+            Log.d(this.getClass().toString(), ">>>>> ############################## View Position: " + position);
+            SalesRecord currentSong = myList.get(position);
+            x = (double) (Integer.parseInt(currentSong.getWtd()));
+            y = (double) (Integer.parseInt(currentSong.getLwtd()));
+            int var = (int) Math.round(((x - y) / y) * 100);
 
-        Log.d(this.getClass().toString(), ">>>>> ############################## View Position: " +  position);
-		SalesRecord currentSong = myList.get(position);
-		x=(double)(Integer.parseInt(currentSong.getWtd()));
-        y=(double)(Integer.parseInt(currentSong.getLwtd()));
-        int var= (int)Math.round(((x-y)/y)*100);
+            if(currentSong.getImageUrl()==null){
+                holder.image.setImageResource(R.drawable.music2x);
+            }
+            else{
 
+            String imagePath = currentSong.getImageUrl();
+            imagePath = (imagePath.contains("mzstatic.com") ? imagePath : imagePath.toLowerCase());
+            Log.d(this.getClass().toString(), ">>>>> Image Path: " + imagePath);
+            UrlImageViewHelper.setUrlDrawable(holder.image, imagePath, null, UrlImageViewHelper.CACHE_DURATION_ONE_DAY);
+            }
+            holder.titleText.setText(currentSong.getTitle());
+            holder.artistText.setText(currentSong.getArtistId());
+            holder.lwtdText.setText(currentSong.getLwtd());
+            holder.wtdText.setText(currentSong.getWtd());
+            holder.rtdText.setText(var + "%");
 
-        String imagePath = currentSong.getImageUrl();
-		Log.d(this.getClass().toString(),">>>>> Image Path: " +  imagePath);
-		UrlImageViewHelper.setUrlDrawable(holder.image, imagePath, null, UrlImageViewHelper.CACHE_DURATION_ONE_DAY);
-        holder.titleText.setText(currentSong.getTitle());
-		holder.artistText.setText(currentSong.getArtistId());
-		holder.lwtdText.setText(currentSong.getLwtd());
-		holder.wtdText.setText(currentSong.getWtd());
-		holder.rtdText.setText(var+"%");
 		return row;
 	}
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">My Application 2</string>
+    <string name="app_name">Songs</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="menu_settings">Settings</string>
@@ -35,5 +35,31 @@
     <string name="paytrm">pTerm</string>
     <string name="sHrs">sHrs</string>
     <string name="wHrs">wHrs</string>
+
+    <string-array name="titles">
+        <item>Songs</item>
+        <item>Albums</item>
+        <item>Videos</item>
+        <item>Pre-Order</item>
+        <item>eSingle-One audio track</item>
+        <item>eSingle-Multiple tracks</item>
+        <item>TV Episode</item>
+        <item>TV Season</item>
+        <item>Movie</item>
+        <item>Movie Rental</item>
+    </string-array>
+
+    <array name="icons">
+        <item>@drawable/songs</item>
+        <item>@drawable/albums</item>
+        <item>@drawable/videos</item>
+        <item>@drawable/preorder</item>
+        <item>@drawable/oneaudiotrack</item>
+        <item>@drawable/multipletracks</item>
+        <item>@drawable/tvepisode</item>
+        <item>@drawable/tvseason</item>
+        <item>@drawable/movie</item>
+        <item>@drawable/moverental</item>
+    </array>
 
 </resources>

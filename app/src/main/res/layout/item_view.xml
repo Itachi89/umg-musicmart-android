@@ -4,19 +4,19 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:id="@+id/item_icon"
         android:src="@drawable/bug"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="false"
-        android:maxWidth="80dp"
         android:longClickable="false"
-        android:maxHeight="80dp"
         android:adjustViewBounds="true"
-        android:minHeight="80dp"
-        android:minWidth="80dp" />
+        android:minHeight="100dp"
+        android:minWidth="100dp"
+        android:maxHeight="100dp"
+        android:maxWidth="100dp"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -26,7 +26,8 @@
         android:textSize="13dp"
         android:id="@+id/item_Title"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/item_icon" />
+        android:layout_toRightOf="@+id/item_icon"
+        custom:fontFamily="curvaceous_script" />
 
     <TextView
         android:layout_width="match_parent"

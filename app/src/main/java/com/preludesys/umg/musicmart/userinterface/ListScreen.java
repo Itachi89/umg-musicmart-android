@@ -30,6 +30,7 @@ public class ListScreen extends MusicMartActivity {
 	String searchString;
     public long offset=0;
     int newPosition =0;
+    int increment = 20;
     //String deviceId =Secure.getString(this.getContentResolver(),Secure.ANDROID_ID);
 
 	@Override
@@ -47,7 +48,6 @@ public class ListScreen extends MusicMartActivity {
             @Override
             public void onClick(View arg0) {
                 // Starting a new async task
-
                 offset=offset+20;
                 new SalesRecordListTask(listScreen).execute(offset);
             }
@@ -58,17 +58,16 @@ public class ListScreen extends MusicMartActivity {
         return new PostTaskExecuteListener<List<SalesRecord>>() {
             public void performOperation(List<SalesRecord> items) {
                 try{
-
-                    salesRecordItems.addAll(items);
                     Log.d(this.getClass().toString(),">>>>>>>>>>>>>>>>>> Inside performOperation");
-                    SalesRecordAdapter salesRecordAdapter = new SalesRecordAdapter(listScreen, R.layout.item_view, salesRecordItems);
+                    salesRecordItems.addAll(items);
                     ListView listView = (ListView) findViewById(R.id.txtSongs);
+                    int currentPosition = listView.getLastVisiblePosition();
+                    Log.d(this.getClass().toString(),">>>>>>>>>>>>>>>>>> currentPosition: " + currentPosition);
+                    SalesRecordAdapter salesRecordAdapter = new SalesRecordAdapter(listScreen, R.layout.item_view, salesRecordItems);
                     listView.setAdapter(salesRecordAdapter);
-                    int currentPosition = listView.getFirstVisiblePosition();
-                    newPosition = currentPosition+newPosition;
-
-                    newPosition=newPosition+20;
-                    listView.setSelectionFromTop(newPosition-20,0);
+                    newPosition = currentPosition + increment;
+                    //newPosition=newPosition+20;
+                    listView.setSelectionFromTop(currentPosition,0);
                 }
                 catch (Exception e) {
                     Log.d(this.getClass().toString(), "Error in Home Listener : " + e);
