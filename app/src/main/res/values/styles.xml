@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="Baroque" parent="@android:style/TextAppearance.Medium">
+    <style name="Helvetica_LT_57_Condensed" parent="@android:style/TextAppearance.Medium">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">#F2BAD0</item>

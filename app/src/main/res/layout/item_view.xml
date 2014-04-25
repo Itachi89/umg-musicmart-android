@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <ImageView
@@ -27,7 +28,7 @@
         android:id="@+id/item_Title"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/item_icon"
-        custom:fontFamily="curvaceous_script" />
+        custom:fontFamily="Helvetica_LT_57_Condensed" />
 
     <TextView
         android:layout_width="match_parent"
@@ -37,18 +38,19 @@
         android:textSize="10dp"
         android:id="@+id/item_Artistid"
         android:layout_below="@+id/item_Title"
-        android:layout_toRightOf="@+id/item_icon" />
+        android:layout_toRightOf="@+id/item_icon"
+        custom:fontFamily="Helvetica_LT_57_Condensed" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="13dp"
-
         android:text="Wtd"
         android:id="@+id/item_wtd"
         android:layout_alignBottom="@+id/item_icon"
-        android:layout_toRightOf="@+id/item_icon" />
+        android:layout_toRightOf="@+id/item_icon"
+        custom:fontFamily="Helvetica_LT_57_Condensed" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -60,19 +62,20 @@
         android:id="@+id/item_lwtd"
         android:layout_marginLeft="55dp"
         android:layout_alignTop="@+id/item_wtd"
-        android:layout_toRightOf="@+id/item_wtd" />
+        android:layout_toRightOf="@+id/item_wtd"
+        custom:fontFamily="Helvetica_LT_57_Condensed" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="13dp"
-
         android:text="Rtd"
         android:id="@+id/item_rtd"
         android:layout_marginLeft="55dp"
         android:layout_alignTop="@+id/item_lwtd"
-        android:layout_toRightOf="@+id/item_lwtd"  />
+        android:layout_toRightOf="@+id/item_lwtd"
+        custom:fontFamily="Helvetica_LT_57_Condensed" />
 
 
 </RelativeLayout>
