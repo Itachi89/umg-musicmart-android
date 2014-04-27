@@ -2,6 +2,7 @@ package com.preludesys.umg.musicmart.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,14 +24,15 @@ public class SalesRecordAdapter extends  ArrayAdapter<SalesRecord> {
 	List<SalesRecord> myList;
     double x;
     double y;
+    private Typeface typeface;
 
-
-	public SalesRecordAdapter(Context context, int layoutResourceId, List<SalesRecord> myList) {
+	public SalesRecordAdapter(Context context, int layoutResourceId, List<SalesRecord> myList, Typeface typeface) {
 		super(context, layoutResourceId, myList);
 		Log.d(this.getClass().toString(),">>>>>> Inside SalesRecordAdapter: ");
 		this.layoutResourceId = layoutResourceId;
 		this.context = context;
 		this.myList = myList;
+        this.typeface = typeface;
 	}
 
     public SalesRecordAdapter(Context context, int layoutResourceId) {
@@ -39,8 +41,6 @@ public class SalesRecordAdapter extends  ArrayAdapter<SalesRecord> {
         this.layoutResourceId = layoutResourceId;
         this.context = context;
     }
-
-
 
     @Override
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -57,6 +57,7 @@ public class SalesRecordAdapter extends  ArrayAdapter<SalesRecord> {
 			holder.lwtdText = (TextView) row.findViewById(R.id.item_lwtd);
 			holder.wtdText = (TextView) row.findViewById(R.id.item_wtd);
             holder.rtdText = (TextView) row.findViewById(R.id.item_rtd);
+            setTypeface(holder);
 			row.setTag(holder);
 		} else {
 			holder = (MusicMartViewHolder) row.getTag();
@@ -85,6 +86,15 @@ public class SalesRecordAdapter extends  ArrayAdapter<SalesRecord> {
 
 		return row;
 	}
+
+    protected void setTypeface(MusicMartViewHolder holder){
+        Log.d(this.getClass().toString(), ">>>>> ############################## Setting Typeface: " + holder.titleText);
+
+        holder.titleText.setTypeface(typeface);
+        holder.artistText.setTypeface(typeface);
+        holder.lwtdText.setTypeface(typeface);
+        holder.rtdText.setTypeface(typeface);
+    }
 
 	static class MusicMartViewHolder {
 		ImageView image;

@@ -31,7 +31,7 @@ public class CustomTextView extends TextView {
     private void setCustomFont(Context ctx) {
         Typeface tf = null;
         try {
-            tf = Typeface.createFromAsset(ctx.getAssets(), "fonts/Helvetica_LT_57_Condensed.ttf");
+            tf = Typeface.createFromAsset(ctx.getAssets(), "fonts/hc.ttf");
             setTag(tf);
             Log.d(this.getClass().toString(), ">>>>>>>>>>> Finished Setting Font");
         } catch (Exception e) {

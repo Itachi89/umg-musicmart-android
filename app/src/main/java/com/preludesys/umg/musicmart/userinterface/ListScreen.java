@@ -1,6 +1,7 @@
 package com.preludesys.umg.musicmart.userinterface;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -31,6 +32,8 @@ public class ListScreen extends MusicMartActivity {
     public long offset=0;
     int newPosition =0;
     int increment = 20;
+    private Typeface tf;
+
     //String deviceId =Secure.getString(this.getContentResolver(),Secure.ANDROID_ID);
 
 	@Override
@@ -53,7 +56,9 @@ public class ListScreen extends MusicMartActivity {
             }
         });
      }
-@Override
+
+
+    @Override
     public PostTaskExecuteListener getPostTaskExecutionListener() {
         return new PostTaskExecuteListener<List<SalesRecord>>() {
             public void performOperation(List<SalesRecord> items) {
@@ -63,7 +68,7 @@ public class ListScreen extends MusicMartActivity {
                     ListView listView = (ListView) findViewById(R.id.txtSongs);
                     int currentPosition = listView.getLastVisiblePosition();
                     Log.d(this.getClass().toString(),">>>>>>>>>>>>>>>>>> currentPosition: " + currentPosition);
-                    SalesRecordAdapter salesRecordAdapter = new SalesRecordAdapter(listScreen, R.layout.item_view, salesRecordItems);
+                    SalesRecordAdapter salesRecordAdapter = new SalesRecordAdapter(listScreen, R.layout.item_view, salesRecordItems, getMusicMartApplication().getTypeFace());
                     listView.setAdapter(salesRecordAdapter);
                     newPosition = currentPosition + increment;
                     //newPosition=newPosition+20;

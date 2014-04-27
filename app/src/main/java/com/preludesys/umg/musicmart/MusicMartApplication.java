@@ -1,8 +1,8 @@
 package com.preludesys.umg.musicmart;
 
 import android.app.Application;
+import android.graphics.Typeface;
 
-import com.preludesys.umg.musicmart.helper.font.CustomFontFactory;
 import com.preludesys.umg.musicmart.model.User;
 
 import java.util.HashMap;
@@ -12,9 +12,9 @@ public class MusicMartApplication extends Application {
 	
 	private User user;
     private Map<String, String> applicationProperties;
-    private CustomFontFactory factory;
+    Typeface tf;
 
-	public User getUser() {
+    public User getUser() {
 		return user;
 	}
 
@@ -26,8 +26,7 @@ public class MusicMartApplication extends Application {
 	public void onCreate()
 	{
 		super.onCreate();
-        factory = new CustomFontFactory(this);
-		// Initialize the singletons so their instances
+   		// Initialize the singletons so their instances
 		// are bound to the application process.
 		initialize();
 	}
@@ -35,21 +34,13 @@ public class MusicMartApplication extends Application {
 	protected void initialize()
 	{
 		initializeApplicationProperties();
-		/*RestUtil.setBaseUrl(ApplicationProperties.getRestServicesUrl());
-		System.out.println(">>>>>>>>>> Base URL " + RestUtil.getBaseUrl());
-		this.todDoWebService = new AnBToDoRestWebServiceClient();
-		this.todDoWebService.setHttpService(new HttpService());
-		*/
 	}
 
-    public  android.view.LayoutInflater getLayoutInflater() {
-        return this.factory.getLayoutInflater();
+    public Typeface getTypeFace(){
+        if(tf == null)
+            tf = Typeface.createFromAsset(getAssets(), "fonts/hc.ttf");
+        return tf;
     }
-
-    public CustomFontFactory getCustomFontFactory() {
-        return this.factory;
-    }
-
 
 	protected void initializeApplicationProperties(){
 		Map<String, String> applicationProperties = new HashMap<String, String>();

@@ -28,8 +28,8 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 17
-        targetSdkVersion 19
+        minSdkVersion 16
+        targetSdkVersion 16
         versionCode 1
         versionName "1.0"
         testPackageName "com.example.myapplication2.app.test"

@@ -1,11 +1,8 @@
 package com.preludesys.umg.musicmart.userinterface;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 
 import com.preludesys.umg.musicmart.MusicMartApplication;
 import com.preludesys.umg.musicmart.listener.PostTaskExecuteListener;
@@ -18,23 +15,6 @@ public abstract class MusicMartActivity extends ActionBarActivity {
 	public MusicMartApplication getMusicMartApplication(){
 		return (MusicMartApplication) getApplication();
 	}
-
-    public void setContentView(int id) {
-        super.setContentView(getMusicMartApplication().getLayoutInflater().inflate(id, null));
-    }
-
-    public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
-        Log.d(this.getClass().toString(), ">>>>>>>>> Inside onCreateView");
-        View v = super.onCreateView(parent, name, context, attrs);
-        if (v == null) {
-            Log.d(this.getClass().toString(), ">>>>>>>>> View isNull");
-            getMusicMartApplication().getCustomFontFactory().onCreateView(parent, name, context, attrs);
-        } else {
-            Log.d(this.getClass().toString(), ">>>>>>>>> View is Not Null");
-            getMusicMartApplication().getCustomFontFactory().setFontFamily(v, context, attrs);
-        }
-        return v;
-    }
 
 	public TaskProgressListener getTaskProgressListener(){
 		TaskProgressListener taskProgessListener = new TaskProgressListener() {
