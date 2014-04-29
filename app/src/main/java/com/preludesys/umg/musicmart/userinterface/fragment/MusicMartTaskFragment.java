@@ -1,37 +1,35 @@
 package com.preludesys.umg.musicmart.userinterface.fragment;
 
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.preludesys.umg.musicmart.R;
-import com.preludesys.umg.musicmart.model.SalesRecord;
-import com.preludesys.umg.musicmart.task.AsyncTaskCallBackListener;
+import com.preludesys.umg.musicmart.listener.CallBackListener;
+import com.preludesys.umg.musicmart.listener.PostTaskExecuteListener;
 import com.preludesys.umg.musicmart.task.MusicMartFragmentAsyncTask;
-
-import java.util.List;
 
 // This and the other inner class can be in separate files if you like.
 // There's no reason they need to be inner classes other than keeping everything together.
-public class MusicMartTaskFragment<T> extends DialogFragment implements AsyncTaskCallBackListener<List<T>>
+public class MusicMartTaskFragment<Params, Result> extends android.support.v4.app.DialogFragment implements PostTaskExecuteListener<Result>
 {
-    static final int TASK_FRAGMENT = 999;  // The request code
+    private int fragmentId;  // The request code
     ProgressBar progressBar;
-    MusicMartFragment parentFragment;
-    MusicMartFragmentAsyncTask task;
+    CallBackListener callBackListener;
+    MusicMartFragmentAsyncTask<Params, Result> task;
+    Params[] values;
 
-    public MusicMartTaskFragment(MusicMartFragment parentFragment, MusicMartFragmentAsyncTask task){
-        this.parentFragment = parentFragment;
+    public MusicMartTaskFragment(CallBackListener<Result> callBackListener, MusicMartFragmentAsyncTask task,int fragmentId){
+        Log.d(this.getClass().toString(), ">>>>>> Inside Constructor");
+        this.fragmentId = fragmentId;
+        this.callBackListener = callBackListener;
         setTask(task);
     }
-
-    // The task we are running.
-    MusicMartFragmentAsyncTask mTask;
 
     public void setTask(MusicMartFragmentAsyncTask task)
     {
@@ -39,25 +37,28 @@ public class MusicMartTaskFragment<T> extends DialogFragment implements AsyncTas
         task.setFragment(this);
     }
 
+    public void setValues(Params[] values){
+        this.values = values;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-        // Retain this instance so it isn't destroyed when MainActivity and
-        // MainFragment change configuration.
+        Log.d(this.getClass().toString(), ">>>>>> Inside onCreate");
         setRetainInstance(true);
-
-        // Start the task! You could move this outside this activity if you want.
-        if (mTask != null)
-            mTask.execute();
+        if (task != null) {
+            Log.d(this.getClass().toString(), ">>>>>> Inside Task is executing");
+            task.execute(values);
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.fragment_task, container);
+        Log.d(this.getClass().toString(), ">>>>>> Inside onCreateView");
+        View view =  inflater.inflate(R.layout.fragment_task, container);
         progressBar = (ProgressBar)view.findViewById(R.id.progressBar);
 
         getDialog().setTitle("Progress Dialog");
@@ -88,13 +89,13 @@ public class MusicMartTaskFragment<T> extends DialogFragment implements AsyncTas
         // If false, it guarantees a result is never returned (onPostExecute() isn't called)
         // but you have to repeatedly call isCancelled() in your doInBackground()
         // function to check if it should exit. For some tasks that might not be feasible.
-        if (mTask != null) {
-            mTask.cancel(false);
+        if (task != null) {
+            task.cancel(false);
         }
 
         // You don't really need this if you don't want.
         if (getTargetFragment() != null)
-            getTargetFragment().onActivityResult(TASK_FRAGMENT, Activity.RESULT_CANCELED, null);
+            getTargetFragment().onActivityResult(fragmentId, Activity.RESULT_CANCELED, null);
     }
 
     @Override
@@ -103,21 +104,20 @@ public class MusicMartTaskFragment<T> extends DialogFragment implements AsyncTas
         super.onResume();
         // This is a little hacky, but we will see if the task has finished while we weren't
         // in this activity, and then we can dismiss ourselves.
-        if (mTask == null)
+        if (task == null)
             dismiss();
     }
 
     // This is called by the AsyncTask.
-    public void updateProgress(int percent)
+    public void updateProgress(Integer percent)
     {
-        progressBar.setProgress(percent);
         progressBar.setProgress(percent);
     }
 
     // This is also called by the AsyncTask.
-    public void onTaskComplete(List<T> result)
+    public void performOperation(Result result)
     {
-        parentFragment.onTaskComplete(result);
+        callBackListener.callBack(result);
 
         // Make sure we check if it is resumed because we will crash if trying to dismiss the dialog
         // after the user has switched to another app.
@@ -126,11 +126,11 @@ public class MusicMartTaskFragment<T> extends DialogFragment implements AsyncTas
 
         // If we aren't resumed, setting the task to null will allow us to dimiss ourselves in
         // onResume().
-        mTask = null;
+        task = null;
 
         // Tell the fragment that we are done.
         if (getTargetFragment() != null)
-            getTargetFragment().onActivityResult(TASK_FRAGMENT, Activity.RESULT_OK, null);
+            getTargetFragment().onActivityResult(fragmentId, Activity.RESULT_OK, null);
 
     }
 }

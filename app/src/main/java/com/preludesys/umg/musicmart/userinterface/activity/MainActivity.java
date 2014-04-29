@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.preludesys.umg.musicmart.listener.PostTaskExecuteListener;
-
 public class MainActivity extends MusicMartActivity {
 	public static final String PREFS_NAME = "MyPrefFile";
 	private static final String PREF_USERNAME = "";
@@ -30,20 +28,16 @@ public class MainActivity extends MusicMartActivity {
 			Log.d(this.getClass().toString(), "password::::::::::"+password);
 			if (username == null || password == null) {
 					//Prompt for username and password
-				Intent SlidingIntent = new Intent(MainActivity.this,
-						ListScreen.class);
-				startActivity(SlidingIntent);
+				Intent slidingIntent = new Intent(MainActivity.this,
+						ListActivity.class);
+				startActivity(slidingIntent);
 				
 				}
 		else{
 			Intent loginIntent = new Intent(MainActivity.this,
-					ListScreen.class);
+					ListActivity.class);
 			startActivity(loginIntent);
 		}
 	}
 
-    @Override
-    public PostTaskExecuteListener getPostTaskExecutionListener(){
-        return null;
-    }
 }

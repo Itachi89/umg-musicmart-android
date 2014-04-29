@@ -6,7 +6,6 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.preludesys.umg.musicmart.model.SalesRecord;
-import com.preludesys.umg.musicmart.userinterface.fragment.MusicMartFragment;
 import com.preludesys.umg.musicmart.util.JSONParser;
 
 import org.apache.http.HttpEntity;
@@ -21,23 +20,19 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-public class SalesRecordListTask extends MusicMartFragmentAsyncTask<Long, Void, List<SalesRecord>> {
-
-    public SalesRecordListTask(MusicMartFragment fragment) {
-       super(fragment);
-    }
+public class SalesRecordListTask extends MusicMartFragmentAsyncTask<Long, List<SalesRecord>> {
 
     @Override
     protected List<SalesRecord> doInBackground(Long... parameters) {
-        System.out.println(">>>>>>Inside SalesRecordListTask - doInBackground");
+       Log.d(this.getClass().toString(), ">>>>>>Inside SalesRecordListTask - doInBackground");
         List<SalesRecord> itemList = null;
         String username = "restclient";
         String password = "D3Rfg$gbmi^1Ydv3f*B";
         String unp = username+":"+password;
-        String result = new String();
+        String result = null;
         long offset =parameters[0];
 
-        String url= "http://192.168.1.14:8080/umg-musicmart-web-services/rest/salesrecord/search?offset="+offset+"&limit=20&searchTerm=&deviceId=5D26E4C6915A4301A08369348698A620FFFFFFFF";
+        String url= "http://192.168.1.19:8080/umg-musicmart-web-services/rest/salesrecord/search?offset="+ offset +"&limit=20&searchTerm=&deviceId=5D26E4C6915A4301A08369348698A620FFFFFFFF";
         Log.d("urls", "url: " + url);
 
 

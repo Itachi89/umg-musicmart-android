@@ -4,13 +4,9 @@ import android.os.AsyncTask;
 
 import com.preludesys.umg.musicmart.userinterface.fragment.MusicMartTaskFragment;
 
-public abstract class MusicMartFragmentAsyncTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
-	private MusicMartTaskFragment taskFragment;
+public abstract class MusicMartFragmentAsyncTask<Params, Result> extends AsyncTask<Params, Integer, Result> {
+	private MusicMartTaskFragment<Params, Result> taskFragment;
     int progress = 0;
-
-	public MusicMartFragmentAsyncTask(MusicMartTaskFragment taskFragment){
-		this.taskFragment = taskFragment;
-	}
 
 	public MusicMartTaskFragment getFragment(){
         return this.taskFragment;
@@ -21,7 +17,7 @@ public abstract class MusicMartFragmentAsyncTask<Params, Progress, Result> exten
     }
 
     @Override
-    protected void onProgressUpdate(Progress... values)
+    protected void onProgressUpdate(Integer... values)
     {
         if (taskFragment == null)
             return;
@@ -33,7 +29,7 @@ public abstract class MusicMartFragmentAsyncTask<Params, Progress, Result> exten
     {
         if (taskFragment == null)
             return;
-        taskFragment.taskFinished(result);
+        taskFragment.performOperation(result);
     }
 	
 }
