@@ -1,4 +1,4 @@
-package com.preludesys.umg.musicmart.userinterface;
+package com.preludesys.umg.musicmart.userinterface.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,9 +30,9 @@ public class MainActivity extends MusicMartActivity {
 			Log.d(this.getClass().toString(), "password::::::::::"+password);
 			if (username == null || password == null) {
 					//Prompt for username and password
-				Intent listIntent = new Intent(MainActivity.this,
+				Intent SlidingIntent = new Intent(MainActivity.this,
 						ListScreen.class);
-				startActivity(listIntent);
+				startActivity(SlidingIntent);
 				
 				}
 		else{

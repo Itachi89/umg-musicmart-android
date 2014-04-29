@@ -2,7 +2,7 @@ package com.example.myapplication2.app.test;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-import com.preludesys.umg.musicmart.userinterface.MainActivity;
+import com.preludesys.umg.musicmart.userinterface.activity.MainActivity;
 
 
 public class LaunchActivityTest

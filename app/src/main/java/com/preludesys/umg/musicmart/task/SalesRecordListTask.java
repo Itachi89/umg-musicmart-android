@@ -6,7 +6,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.preludesys.umg.musicmart.model.SalesRecord;
-import com.preludesys.umg.musicmart.userinterface.MusicMartActivity;
+import com.preludesys.umg.musicmart.userinterface.activity.MusicMartActivity;
 import com.preludesys.umg.musicmart.util.JSONParser;
 
 import org.apache.http.HttpEntity;
@@ -43,7 +43,7 @@ public class SalesRecordListTask extends MusicMartAsyncTask<Long, Void, List<Sal
         String result = new String();
         long offset =parameters[0];
 
-        String url= "http://192.168.1.11:8080/umg-musicmart-web-services/rest/salesrecord/search?offset="+offset+"&limit=20&searchTerm=&deviceId=5D26E4C6915A4301A08369348698A620FFFFFFFF";
+        String url= "http://192.168.1.14:8080/umg-musicmart-web-services/rest/salesrecord/search?offset="+offset+"&limit=20&searchTerm=&deviceId=5D26E4C6915A4301A08369348698A620FFFFFFFF";
         Log.d("urls", "url: " + url);
 
 

@@ -1,4 +1,4 @@
-package com.preludesys.umg.musicmart.userinterface;
+package com.preludesys.umg.musicmart.userinterface.activity;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.ActionBarActivity;
