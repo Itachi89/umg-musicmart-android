@@ -10,23 +10,33 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.preludesys.umg.musicmart.R;
+import com.preludesys.umg.musicmart.model.SalesRecord;
+import com.preludesys.umg.musicmart.task.AsyncTaskCallBackListener;
 import com.preludesys.umg.musicmart.task.MusicMartFragmentAsyncTask;
+
+import java.util.List;
 
 // This and the other inner class can be in separate files if you like.
 // There's no reason they need to be inner classes other than keeping everything together.
-public class TaskFragment extends DialogFragment
+public class MusicMartTaskFragment<T> extends DialogFragment implements AsyncTaskCallBackListener<List<T>>
 {
     static final int TASK_FRAGMENT = 999;  // The request code
+    ProgressBar progressBar;
+    MusicMartFragment parentFragment;
+    MusicMartFragmentAsyncTask task;
+
+    public MusicMartTaskFragment(MusicMartFragment parentFragment, MusicMartFragmentAsyncTask task){
+        this.parentFragment = parentFragment;
+        setTask(task);
+    }
 
     // The task we are running.
     MusicMartFragmentAsyncTask mTask;
 
     public void setTask(MusicMartFragmentAsyncTask task)
     {
-        mTask = task;
-
-        // Tell the AsyncTask to call updateProgress() and taskFinished() on this fragment.
-        mTask.setFragment(this);
+        this.task = task;
+        task.setFragment(this);
     }
 
     @Override
@@ -48,7 +58,7 @@ public class TaskFragment extends DialogFragment
                              Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_task, container);
-
+        progressBar = (ProgressBar)view.findViewById(R.id.progressBar);
 
         getDialog().setTitle("Progress Dialog");
 
@@ -97,9 +107,18 @@ public class TaskFragment extends DialogFragment
             dismiss();
     }
 
-    // This is also called by the AsyncTask.
-    public void taskFinished()
+    // This is called by the AsyncTask.
+    public void updateProgress(int percent)
     {
+        progressBar.setProgress(percent);
+        progressBar.setProgress(percent);
+    }
+
+    // This is also called by the AsyncTask.
+    public void onTaskComplete(List<T> result)
+    {
+        parentFragment.onTaskComplete(result);
+
         // Make sure we check if it is resumed because we will crash if trying to dismiss the dialog
         // after the user has switched to another app.
         if (isResumed())
@@ -112,5 +131,6 @@ public class TaskFragment extends DialogFragment
         // Tell the fragment that we are done.
         if (getTargetFragment() != null)
             getTargetFragment().onActivityResult(TASK_FRAGMENT, Activity.RESULT_OK, null);
+
     }
 }

@@ -10,8 +10,8 @@ import android.widget.ListView;
 
 import com.preludesys.umg.musicmart.R;
 import com.preludesys.umg.musicmart.adapter.SalesRecordAdapter;
-import com.preludesys.umg.musicmart.listener.PostTaskExecuteListener;
 import com.preludesys.umg.musicmart.model.SalesRecord;
+import com.preludesys.umg.musicmart.task.AsyncTaskCallBackListener;
 import com.preludesys.umg.musicmart.task.SalesRecordListTask;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by varunsundaramoorthy on 4/28/14.
  */
-public class ListFragment extends MusicMartFragment {
+public class SalesRecordListFragment extends MusicMartFragment<SalesRecord> implements AsyncTaskCallBackListener<List<SalesRecord>> {
     final List<SalesRecord> salesRecordItems = new ArrayList<SalesRecord>();
     public long offset=0;
     int newPosition =0;
@@ -36,7 +36,8 @@ public class ListFragment extends MusicMartFragment {
         final Button btnLoadMore = new Button(getActivity());
         btnLoadMore.setText("Load More");
         ListView listView = (ListView) rootView.findViewById(R.id.txtSongs);
-        new SalesRecordListTask(getMusicMartActivity()).execute(offset);
+        new MusicMartTaskFragment(this, new SalesRecordListTask() {
+        });
 
         listView.addFooterView(btnLoadMore);
         btnLoadMore.setOnClickListener(new View.OnClickListener() {
@@ -44,32 +45,30 @@ public class ListFragment extends MusicMartFragment {
             public void onClick(View arg0) {
                 // Starting a new async task
                 offset=offset+20;
-                new SalesRecordListTask(getMusicMartActivity()).execute(offset);
+               // new SalesRecordListTask(getMusicMartActivity()).execute(offset);
             }
         });
         return rootView;
     }
+
+
     @Override
-    public PostTaskExecuteListener getPostTaskExecutionListener() {
-        return new PostTaskExecuteListener<List<SalesRecord>>() {
-            public void performOperation(List<SalesRecord> items) {
-                try{
-                    Log.d(this.getClass().toString(), ">>>>>>>>>>>>>>>>>> Inside performOperation");
-                    salesRecordItems.addAll(items);
-                    ListView listView = (ListView) rootView.findViewById(R.id.txtSongs);
-                    int currentPosition = listView.getLastVisiblePosition();
-                    Log.d(this.getClass().toString(),">>>>>>>>>>>>>>>>>> currentPosition: " + currentPosition);
-                    SalesRecordAdapter salesRecordAdapter = new SalesRecordAdapter(getActivity(), R.layout.item_view, salesRecordItems, getMusicMartActivity().getMusicMartApplication().getTypeFace());
-                    listView.setAdapter(salesRecordAdapter);
-                    newPosition = currentPosition + increment;
-                    //newPosition=newPosition+20;
-                    listView.setSelectionFromTop(currentPosition,0);
-                }
-                catch (Exception e) {
-                    Log.d(this.getClass().toString(), "Error in Home Listener : " + e);
-                }
-            }
-        };
+    public void onTaskComplete(List<SalesRecord> result) {
+        try{
+            Log.d(this.getClass().toString(), ">>>>>>>>>>>>>>>>>> Inside performOperation");
+            salesRecordItems.addAll(result);
+            ListView listView = (ListView) rootView.findViewById(R.id.txtSongs);
+            int currentPosition = listView.getLastVisiblePosition();
+            Log.d(this.getClass().toString(),">>>>>>>>>>>>>>>>>> currentPosition: " + currentPosition);
+            SalesRecordAdapter salesRecordAdapter = new SalesRecordAdapter(getActivity(), R.layout.item_view, salesRecordItems, getMusicMartActivity().getMusicMartApplication().getTypeFace());
+            listView.setAdapter(salesRecordAdapter);
+            newPosition = currentPosition + increment;
+            //newPosition=newPosition+20;
+            listView.setSelectionFromTop(currentPosition,0);
+        }
+        catch (Exception e) {
+            Log.d(this.getClass().toString(), "Error in Home Listener : " + e);
+        }
     }
 
 }

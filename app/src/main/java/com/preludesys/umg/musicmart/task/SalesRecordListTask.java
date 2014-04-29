@@ -6,7 +6,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.preludesys.umg.musicmart.model.SalesRecord;
-import com.preludesys.umg.musicmart.userinterface.activity.MusicMartActivity;
+import com.preludesys.umg.musicmart.userinterface.fragment.MusicMartFragment;
 import com.preludesys.umg.musicmart.util.JSONParser;
 
 import org.apache.http.HttpEntity;
@@ -21,16 +21,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-public class SalesRecordListTask extends MusicMartAsyncTask<Long, Void, List<SalesRecord>> {
+public class SalesRecordListTask extends MusicMartFragmentAsyncTask<Long, Void, List<SalesRecord>> {
 
-    private MusicMartActivity activity;
-
-    public SalesRecordListTask(MusicMartActivity activity) {
-        super(activity.getMusicMartApplication());
-        this.activity = activity;
-        setTaskProgressListener(activity.getTaskProgressListener());
-        setPostTaskExecuteListener(activity.getPostTaskExecutionListener());
-        // TODO Auto-generated constructor stub
+    public SalesRecordListTask(MusicMartFragment fragment) {
+       super(fragment);
     }
 
     @Override

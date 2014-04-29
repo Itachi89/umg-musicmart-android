@@ -1,52 +1,39 @@
 package com.preludesys.umg.musicmart.task;
 
-import android.app.Fragment;
 import android.os.AsyncTask;
 
-import com.preludesys.umg.musicmart.MusicMartApplication;
-import com.preludesys.umg.musicmart.listener.PostTaskExecuteListener;
-import com.preludesys.umg.musicmart.listener.TaskProgressListener;
+import com.preludesys.umg.musicmart.userinterface.fragment.MusicMartTaskFragment;
 
 public abstract class MusicMartFragmentAsyncTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
-	private TaskProgressListener taskProgressListener;
-	private PostTaskExecuteListener<Result> postTaskExecuteListener;
-	private MusicMartApplication application;
-    private Fragment fragment;
+	private MusicMartTaskFragment taskFragment;
+    int progress = 0;
 
-	public MusicMartFragmentAsyncTask(Fragment fragment){
-		this.fragment = fragment;
+	public MusicMartFragmentAsyncTask(MusicMartTaskFragment taskFragment){
+		this.taskFragment = taskFragment;
 	}
 
-	public TaskProgressListener getTaskProgressListener() {
-		return taskProgressListener;
-	}
+	public MusicMartTaskFragment getFragment(){
+        return this.taskFragment;
+    }
 
-	public void setTaskProgressListener(TaskProgressListener taskProgressListener) {
-		this.taskProgressListener = taskProgressListener;
-	}
+    public void setFragment(MusicMartTaskFragment taskFragment){
+        this.taskFragment = taskFragment;
+    }
 
-	public PostTaskExecuteListener<Result> getPostTaskExecuteListener() {
-		return postTaskExecuteListener;
-	}
+    @Override
+    protected void onProgressUpdate(Progress... values)
+    {
+        if (taskFragment == null)
+            return;
+        taskFragment.updateProgress(progress);
+    }
 
-	public void setPostTaskExecuteListener(PostTaskExecuteListener<Result> postTaskExecuteListener){
-		this.postTaskExecuteListener = postTaskExecuteListener;
-	}
-	
-	@Override
-	protected void onPreExecute() {
-		super.onPreExecute();
-		if(getTaskProgressListener() != null){
-			getTaskProgressListener().beginProgress();
-		}
-	}
-	
-	@Override
-	protected void onPostExecute(Result result) {
-		if(getTaskProgressListener() != null){
-			getTaskProgressListener().endProgress();
-		}
-		getPostTaskExecuteListener().performOperation(result);
-	}
+
+    protected void onPostExecute(Result result)
+    {
+        if (taskFragment == null)
+            return;
+        taskFragment.taskFinished(result);
+    }
 	
 }
