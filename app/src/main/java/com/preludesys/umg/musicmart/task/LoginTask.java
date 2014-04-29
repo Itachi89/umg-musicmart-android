@@ -8,7 +8,7 @@ import com.preludesys.umg.musicmart.model.User;
  * @author Jay Palaniappan
  * 
  */
-public class LoginTask extends MusicMartAsyncTask<String, Void, User> {
+public class LoginTask extends MusicMartActivityAsyncTask<String, Void, User> {
 
 	public LoginTask(MusicMartApplication application) {
 		 super(application);

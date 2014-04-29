@@ -20,7 +20,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-public class SalesRecordListTask extends MusicMartFragmentAsyncTask<Long, List<SalesRecord>> {
+public class SalesRecordListAsyncTask extends MusicMartFragmentAsyncTask<Long, List<SalesRecord>> {
 
     @Override
     protected List<SalesRecord> doInBackground(Long... parameters) {

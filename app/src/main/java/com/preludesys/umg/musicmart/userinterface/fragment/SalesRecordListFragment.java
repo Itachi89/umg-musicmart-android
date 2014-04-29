@@ -13,7 +13,7 @@ import com.preludesys.umg.musicmart.R;
 import com.preludesys.umg.musicmart.adapter.SalesRecordAdapter;
 import com.preludesys.umg.musicmart.listener.CallBackListener;
 import com.preludesys.umg.musicmart.model.SalesRecord;
-import com.preludesys.umg.musicmart.task.SalesRecordListTask;
+import com.preludesys.umg.musicmart.task.SalesRecordListAsyncTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +58,7 @@ public class SalesRecordListFragment extends MusicMartFragment implements CallBa
 
     void loadListValues(Long values){
         Log.d(this.getClass().toString(), ">>>>>> Loading List Values");
-        SalesRecordListTask task = new SalesRecordListTask();
+        SalesRecordListAsyncTask task = new SalesRecordListAsyncTask();
         MusicMartTaskFragment<Long, List<SalesRecord>> salesRecordMusicMartTaskFragment = (MusicMartTaskFragment<Long, List<SalesRecord>>) fragmentManager.findFragmentByTag(TASK_FRAGMENT_TAG);
         if (null == salesRecordMusicMartTaskFragment){
             salesRecordMusicMartTaskFragment =
