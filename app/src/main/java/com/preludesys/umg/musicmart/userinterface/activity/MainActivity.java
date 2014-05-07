@@ -29,13 +29,13 @@ public class MainActivity extends MusicMartActivity {
 			if (username == null || password == null) {
 					//Prompt for username and password
 				Intent slidingIntent = new Intent(MainActivity.this,
-						ListActivity.class);
+						SalesRecordListActivity.class);
 				startActivity(slidingIntent);
 				
 				}
 		else{
 			Intent loginIntent = new Intent(MainActivity.this,
-					ListActivity.class);
+					SalesRecordListActivity.class);
 			startActivity(loginIntent);
 		}
 	}

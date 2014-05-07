@@ -6,7 +6,6 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.preludesys.umg.musicmart.model.SalesRecord;
-import com.preludesys.umg.musicmart.util.JSONParser;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -14,25 +13,32 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Map;
 
-public class SalesRecordListAsyncTask extends MusicMartFragmentAsyncTask<Long, List<SalesRecord>> {
+public class SalesRecordListAsyncTask extends MusicMartFragmentAsyncTask<Map<String, Object>, List<SalesRecord>> {
+
+    public static final String OFFSET = "OFFSET";
+    public static final String CATEGORY = "CATEGORY";
 
     @Override
-    protected List<SalesRecord> doInBackground(Long... parameters) {
+    protected List<SalesRecord> doInBackground(Map... parameters) {
        Log.d(this.getClass().toString(), ">>>>>>Inside SalesRecordListTask - doInBackground");
         List<SalesRecord> itemList = null;
         String username = "restclient";
         String password = "D3Rfg$gbmi^1Ydv3f*B";
         String unp = username+":"+password;
         String result = null;
-        long offset =parameters[0];
+        long offset = (Long) parameters[0].get(OFFSET);
+        String category =  (String) parameters[0].get(CATEGORY);
 
-        String url= "http://192.168.1.19:8080/umg-musicmart-web-services/rest/salesrecord/search?offset="+ offset +"&limit=20&searchTerm=&deviceId=5D26E4C6915A4301A08369348698A620FFFFFFFF";
+        String url= "http://192.168.1.4:8080/umg-musicmart-web-services/rest/salesrecord/search?configId="+ category + "&offset="+ offset +"&limit=20&deviceId=5D26E4C6915A4301A08369348698A620FFFFFFFF";
         Log.d("urls", "url: " + url);
 
 
@@ -64,9 +70,16 @@ public class SalesRecordListAsyncTask extends MusicMartFragmentAsyncTask<Long, L
         } catch (Exception e) {
             Log.e(this.getClass().toString(), ">>>>>> Error in doBackground " + e.toString());
         }
-        JSONParser<SalesRecord> parser = new JSONParser<SalesRecord>();
 
-        return parser.parse(result);
+        List<SalesRecord> list = null;
+        try{
+            list =  (new ObjectMapper()).readValue(result, new TypeReference<List<SalesRecord>>() {});
+        }
+        catch (Exception e){
+            Log.e(this.getClass().toString(), e.getMessage());
+        }
+
+        return list;
     }
 
 }

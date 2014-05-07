@@ -1,11 +1,13 @@
 package com.preludesys.umg.musicmart.userinterface.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -14,9 +16,12 @@ import com.preludesys.umg.musicmart.adapter.SalesRecordAdapter;
 import com.preludesys.umg.musicmart.listener.CallBackListener;
 import com.preludesys.umg.musicmart.model.SalesRecord;
 import com.preludesys.umg.musicmart.task.SalesRecordListAsyncTask;
+import com.preludesys.umg.musicmart.userinterface.activity.SalesRecordDetailActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by varunsundaramoorthy on 4/28/14.
@@ -26,9 +31,19 @@ public class SalesRecordListFragment extends MusicMartFragment implements CallBa
     public long offset=0;
     int newPosition =0;
     int increment = 20;
+    private String listCategory = "songs";
     private View rootView;
     final SalesRecordListFragment salesRecordListFragment = this;
     FragmentManager fragmentManager;
+
+    public String getListCategory() {
+        return listCategory;
+    }
+
+    public void setListCategory(String listCategory) {
+        this.listCategory = listCategory;
+    }
+
     static final String TASK_FRAGMENT_TAG = "task";
     static final int TASK_FRAGMENT = 0;
 
@@ -49,22 +64,28 @@ public class SalesRecordListFragment extends MusicMartFragment implements CallBa
             public void onClick(View arg0) {
                 // Starting a new async task
                 offset=offset+20;
-                salesRecordListFragment.loadListValues(offset);
+                salesRecordListFragment.loadListValues(offset, salesRecordListFragment.listCategory);
             }
         });
-       loadListValues(0L);
-       return rootView;
+       loadListValues(0L, listCategory);
+        registerClickCallback(listView);
+        return rootView;
     }
 
-    void loadListValues(Long values){
+    protected void loadListValues(Long values, String category){
         Log.d(this.getClass().toString(), ">>>>>> Loading List Values");
         SalesRecordListAsyncTask task = new SalesRecordListAsyncTask();
-        MusicMartTaskFragment<Long, List<SalesRecord>> salesRecordMusicMartTaskFragment = (MusicMartTaskFragment<Long, List<SalesRecord>>) fragmentManager.findFragmentByTag(TASK_FRAGMENT_TAG);
+        MusicMartTaskFragment<Map<String, Object>, List<SalesRecord>> salesRecordMusicMartTaskFragment = (MusicMartTaskFragment<Map<String, Object>, List<SalesRecord>>) fragmentManager.findFragmentByTag(TASK_FRAGMENT_TAG);
         if (null == salesRecordMusicMartTaskFragment){
             salesRecordMusicMartTaskFragment =
-                    new MusicMartTaskFragment<Long, List<SalesRecord>>(salesRecordListFragment, task, salesRecordListFragment.getId());
+                    new MusicMartTaskFragment<Map<String, Object>, List<SalesRecord>>(salesRecordListFragment, task, salesRecordListFragment.getId());
         }
-        salesRecordMusicMartTaskFragment.setValues(new Long[]{values});
+        Map<String, Object> parameterMap = new HashMap<String, Object>();
+        parameterMap.put(SalesRecordListAsyncTask.OFFSET, values);
+        parameterMap.put(SalesRecordListAsyncTask.CATEGORY, category);
+
+
+        salesRecordMusicMartTaskFragment.setValues(new Map[]{parameterMap});
         Log.d(this.getClass().toString(), ">>>>>> Showing salesRecordMusicMartTaskFragment");
         salesRecordMusicMartTaskFragment.show(fragmentManager, TASK_FRAGMENT_TAG);
     }
@@ -87,6 +108,34 @@ public class SalesRecordListFragment extends MusicMartFragment implements CallBa
             Log.d(this.getClass().toString(), "Error in Home Listener : " + e);
         }
     }
+    public void registerClickCallback(ListView listView) {
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View viewClicked,
+                                    int position, long id) {
+
+                SalesRecord salesRecord = salesRecordItems.get(position);
+                String title =salesRecord.getTitle();
+                Log.d(this.getClass().toString(),">>**title :" +title);
+                String artist=salesRecord.getArtistId();
+                Log.d(this.getClass().toString(),">>**artist :" +artist);
+                String label=salesRecord.getLabel();
+                Log.d(this.getClass().toString(),">>**label :" +label);
+                Integer salesRecordId=salesRecord.getSalesRecordId();
+                Log.d(this.getClass().toString(),">>**id :" +salesRecordId);
+
+
+                Intent detailIntent = new Intent(getActivity().getApplicationContext(),SalesRecordDetailActivity.class);
+                detailIntent.putExtra("title",title);
+                detailIntent.putExtra("artist",artist);
+                detailIntent.putExtra("label",label);
+                detailIntent.putExtra("salesRecord", salesRecord);
+               // detailIntent.putExtra("id",salesRecordId);
+                startActivity(detailIntent);
+
+            }
+        });
+    }
 
 }

@@ -1,10 +1,12 @@
 package com.preludesys.umg.musicmart.model;
 
+import java.util.List;
+
 /**
  * Created by varunsundaramoorthy on 4/24/14.
  */
 public class SalesRecordDetail extends SalesRecord {
-    private static final long serialVersionUID = 5994209158809211813L;
+    private static final long serialVersionUID = 694379600452602646L;
     private String country;
     private String date;
     private String itunesPreviousRank;
@@ -16,6 +18,16 @@ public class SalesRecordDetail extends SalesRecord {
     private String superLabel;
     private String updatedDate;
     private String wtd;
+    private List<Link> links;
+
+    public List<Link> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<Link> links) {
+        this.links = links;
+    }
+
 
     public String getCountry() {
         return country;

@@ -6,6 +6,8 @@ package com.preludesys.umg.musicmart.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +26,13 @@ public class SlidingMenuAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<NavDrawerItem> navDrawerItems;
+    private Typeface typeface;
 
-    public SlidingMenuAdapter(Context context, ArrayList<NavDrawerItem> navDrawerItems){
+
+    public SlidingMenuAdapter(Context context, ArrayList<NavDrawerItem> navDrawerItems,Typeface typeface){
         this.context = context;
         this.navDrawerItems = navDrawerItems;
+        this.typeface= typeface;
     }
 
     @Override
@@ -47,29 +52,48 @@ public class SlidingMenuAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
+        View row= convertView;
+        SlidingMenuViewHolder holder = null;
+
+        if (row == null) {
             LayoutInflater mInflater = (LayoutInflater)
                     context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.drawer_list_item, null);
+            row = mInflater.inflate(R.layout.drawer_list_item, null);
+            holder= new SlidingMenuViewHolder();
+
+            holder.imgIcon = (ImageView) row.findViewById(R.id.icon);
+            holder.txtTitle = (TextView) row.findViewById(R.id.title);
+            holder.txtCount = (TextView) row.findViewById(R.id.counter);
+            setTypeface(holder);
+            row.setTag(holder);
+        }else{
+            holder = (SlidingMenuViewHolder) row.getTag();
         }
 
-        ImageView imgIcon = (ImageView) convertView.findViewById(R.id.icon);
-        TextView txtTitle = (TextView) convertView.findViewById(R.id.title);
-        TextView txtCount = (TextView) convertView.findViewById(R.id.counter);
-
-        imgIcon.setImageResource(navDrawerItems.get(position).getIcon());
-        txtTitle.setText(navDrawerItems.get(position).getTitle());
+        NavDrawerItem currentItem = navDrawerItems.get(position);
+        holder.imgIcon.setImageResource(currentItem.getIcon());
+        holder.txtTitle.setText(currentItem.getTitle());
 
         // displaying count
         // check whether it set visible or not
-        if(navDrawerItems.get(position).getCounterVisibility()){
-            txtCount.setText(navDrawerItems.get(position).getCount());
+        if(currentItem.getCounterVisibility()){
+            holder.txtCount.setText(currentItem.getCount());
         }else{
             // hide the counter view
-            txtCount.setVisibility(View.GONE);
+            holder.txtCount.setVisibility(View.GONE);
         }
 
-        return convertView;
+        return row;
+    }
+    protected void setTypeface(SlidingMenuViewHolder holder){
+        Log.d(this.getClass().toString(), ">>>>> ############################## Setting Typeface: " + holder.txtTitle);
+
+        holder.txtTitle.setTypeface(typeface);
+    }
+    static class SlidingMenuViewHolder{
+        ImageView imgIcon;
+        TextView txtTitle;
+        TextView txtCount;
     }
 
 }

@@ -3,6 +3,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -23,7 +24,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Song"
-        android:textSize="13dp"
+        android:textSize="14dp"
+        android:textColor="#000"
         android:id="@+id/item_Title"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/item_icon"
@@ -34,17 +36,18 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Artist"
-        android:textSize="10dp"
+        android:textSize="12dp"
+        android:textColor="#7C7B7B"
         android:id="@+id/item_Artistid"
         android:layout_below="@+id/item_Title"
         android:layout_toRightOf="@+id/item_icon" />
 
     <TextView
-        style="@style/hc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="13dp"
+        android:textColor="#7C7B7B"
         android:text="Wtd"
         android:id="@+id/item_wtd"
         android:layout_alignBottom="@+id/item_icon"
@@ -52,11 +55,11 @@
         />
 
     <TextView
-        style="@style/hc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="13dp"
+        android:textColor="#7C7B7B"
         android:text="Lwtd"
         android:id="@+id/item_lwtd"
         android:layout_marginLeft="55dp"
@@ -65,7 +68,6 @@
         />
 
     <TextView
-        style="@style/hc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"

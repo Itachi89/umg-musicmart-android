@@ -7,14 +7,14 @@ import com.preludesys.umg.musicmart.listener.PostTaskExecuteListener;
 import com.preludesys.umg.musicmart.listener.TaskProgressListener;
 
 public abstract class MusicMartActivityAsyncTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
-	private TaskProgressListener taskProgressListener; 
-	private PostTaskExecuteListener<Result> postTaskExecuteListener; 
+	private TaskProgressListener taskProgressListener;
+	private PostTaskExecuteListener<Result> postTaskExecuteListener;
 	private MusicMartApplication application;
-	
+
 	public MusicMartActivityAsyncTask(MusicMartApplication application){
 		this.application = application;
 	}
-	
+
 	public MusicMartApplication getApplication() {
 		return application;
 	}
@@ -22,7 +22,7 @@ public abstract class MusicMartActivityAsyncTask<Params, Progress, Result> exten
 	public void setApplication(MusicMartApplication application) {
 		this.application = application;
 	}
-	
+
 	public TaskProgressListener getTaskProgressListener() {
 		return taskProgressListener;
 	}
@@ -38,7 +38,7 @@ public abstract class MusicMartActivityAsyncTask<Params, Progress, Result> exten
 	public void setPostTaskExecuteListener(PostTaskExecuteListener<Result> postTaskExecuteListener){
 		this.postTaskExecuteListener = postTaskExecuteListener;
 	}
-	
+
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
@@ -46,7 +46,7 @@ public abstract class MusicMartActivityAsyncTask<Params, Progress, Result> exten
 			getTaskProgressListener().beginProgress();
 		}
 	}
-	
+
 	@Override
 	protected void onPostExecute(Result result) {
 		if(getTaskProgressListener() != null){
@@ -54,5 +54,5 @@ public abstract class MusicMartActivityAsyncTask<Params, Progress, Result> exten
 		}
 		getPostTaskExecuteListener().performOperation(result);
 	}
-	
+
 }

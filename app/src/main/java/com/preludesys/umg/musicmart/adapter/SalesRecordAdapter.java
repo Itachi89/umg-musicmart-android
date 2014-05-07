@@ -35,13 +35,6 @@ public class SalesRecordAdapter extends  ArrayAdapter<SalesRecord> {
         this.typeface = typeface;
 	}
 
-    public SalesRecordAdapter(Context context, int layoutResourceId) {
-        super(context, layoutResourceId);
-        Log.d(this.getClass().toString(),">>>>>> Inside SalesRecordAdapter: ");
-        this.layoutResourceId = layoutResourceId;
-        this.context = context;
-    }
-
     @Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View row = convertView;
