@@ -38,7 +38,7 @@ public class SalesRecordListAsyncTask extends MusicMartFragmentAsyncTask<Map<Str
         long offset = (Long) parameters[0].get(OFFSET);
         String category =  (String) parameters[0].get(CATEGORY);
 
-        String url= "http://192.168.1.4:8080/umg-musicmart-web-services/rest/salesrecord/search?configId="+ category + "&offset="+ offset +"&limit=20&deviceId=5D26E4C6915A4301A08369348698A620FFFFFFFF";
+        String url= "http://192.168.1.6:8080/umg-musicmart-web-services/rest/salesrecord/search?configId="+ category + "&offset="+ offset +"&limit=20&deviceId=5D26E4C6915A4301A08369348698A620FFFFFFFF";
         Log.d("urls", "url: " + url);
 
 

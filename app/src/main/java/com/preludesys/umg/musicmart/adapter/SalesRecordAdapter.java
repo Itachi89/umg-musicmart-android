@@ -2,6 +2,7 @@ package com.preludesys.umg.musicmart.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.preludesys.umg.musicmart.R;
 import com.preludesys.umg.musicmart.model.SalesRecord;
 import com.preludesys.umg.musicmart.urlimageviewhelper.UrlImageViewHelper;
+import com.preludesys.umg.musicmart.util.FontHelper;
 
 import java.util.List;
 
@@ -50,6 +52,9 @@ public class SalesRecordAdapter extends  ArrayAdapter<SalesRecord> {
 			holder.lwtdText = (TextView) row.findViewById(R.id.item_lwtd);
 			holder.wtdText = (TextView) row.findViewById(R.id.item_wtd);
             holder.rtdText = (TextView) row.findViewById(R.id.item_rtd);
+            holder.lwtdKey =(TextView) row.findViewById(R.id.itemKey_lwtd);
+            holder.wtdKey =(TextView) row.findViewById(R.id.itemKey_wtd);
+            holder.rtdKey =(TextView) row.findViewById(R.id.itemKey_rtd);
             setTypeface(holder);
 			row.setTag(holder);
 		} else {
@@ -75,7 +80,18 @@ public class SalesRecordAdapter extends  ArrayAdapter<SalesRecord> {
             holder.artistText.setText(currentSong.getArtistId());
             holder.lwtdText.setText(currentSong.getLwtd());
             holder.wtdText.setText(currentSong.getWtd());
-            holder.rtdText.setText(var + "%");
+
+
+            if(var<0){
+                holder.rtdText.setText(var + "%");
+                holder.rtdText.setTextColor(Color.parseColor("#BB000A"));
+            }else if (var>0){
+                holder.rtdText.setText(var + "%");
+                holder.rtdText.setTextColor(Color.parseColor("#21A516"));
+            }else{
+                holder.rtdText.setText("NR");
+                holder.rtdText.setTextColor(Color.parseColor("#E29D3C"));
+            }
 
 		return row;
 	}
@@ -84,9 +100,19 @@ public class SalesRecordAdapter extends  ArrayAdapter<SalesRecord> {
         Log.d(this.getClass().toString(), ">>>>> ############################## Setting Typeface: " + holder.titleText);
 
         holder.titleText.setTypeface(typeface);
+        FontHelper.sePaintFlags(holder.titleText);
         holder.artistText.setTypeface(typeface);
+        FontHelper.sePaintFlags(holder.artistText);
         holder.lwtdText.setTypeface(typeface);
+        FontHelper.sePaintFlags(holder.lwtdText);
         holder.rtdText.setTypeface(typeface);
+        FontHelper.sePaintFlags(holder.rtdText);
+        holder.rtdKey.setTypeface(typeface);
+        FontHelper.sePaintFlags(holder.rtdText);
+        holder.wtdKey.setTypeface(typeface);
+        FontHelper.sePaintFlags(holder.rtdText);
+        holder.lwtdKey.setTypeface(typeface);
+        FontHelper.sePaintFlags(holder.rtdText);
     }
 
 	static class MusicMartViewHolder {
@@ -96,5 +122,8 @@ public class SalesRecordAdapter extends  ArrayAdapter<SalesRecord> {
 		TextView lwtdText;
 		TextView wtdText;
 		TextView rtdText;
+        TextView rtdKey;
+        TextView wtdKey;
+        TextView lwtdKey;
 	}
 }

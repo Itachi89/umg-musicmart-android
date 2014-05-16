@@ -38,7 +38,7 @@ public class MusicMartApplication extends Application {
 
     public Typeface getTypeFace(){
         if(tf == null)
-            tf = Typeface.createFromAsset(getAssets(), "fonts/hc.ttf");
+            tf = Typeface.createFromAsset(getAssets(), "fonts/hc-old2.ttf");
         return tf;
     }
 

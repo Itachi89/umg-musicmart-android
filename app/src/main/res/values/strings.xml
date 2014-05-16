@@ -40,13 +40,17 @@
         <item>Songs</item>
         <item>Albums</item>
         <item>Videos</item>
-        <item>Pre-Order</item>
         <item>eSingle-One audio track</item>
         <item>eSingle-Multiple tracks</item>
         <item>TV Episode</item>
         <item>TV Season</item>
         <item>Movie</item>
         <item>Movie Rental</item>
+        <item>iPhone App</item>
+        <item>Ringtone-PreCut</item>
+        <item>MusicPass</item>
+        <item>Concert Film</item>
+        <item>Alert Tone</item>
     </string-array>
 
 
@@ -54,13 +58,18 @@
         <item>@drawable/songs</item>
         <item>@drawable/albums</item>
         <item>@drawable/videos</item>
-        <item>@drawable/preorder</item>
         <item>@drawable/oneaudiotrack</item>
         <item>@drawable/multipletracks</item>
         <item>@drawable/tvepisode</item>
         <item>@drawable/tvseason</item>
         <item>@drawable/movie</item>
         <item>@drawable/moverental</item>
+        <item>@drawable/i_phone_app</item>
+        <item>@drawable/ringtone_precut</item>
+        <item>@drawable/music_pass</item>
+        <item>@drawable/concert_film</item>
+        <item>@drawable/alert_tone</item>
+
     </array>
 
     <string name="drawer_open">Open navigation drawer</string>

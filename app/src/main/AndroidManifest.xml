@@ -7,12 +7,13 @@
         android:allowBackup="true"
         android:icon="@drawable/umg"
         android:label="@string/app_name"
-
+        android:screenOrientation="portrait"
         android:theme="@style/AppTheme"
         android:name="com.preludesys.umg.musicmart.MusicMartApplication">
         <activity
             android:name=".userinterface.activity.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,12 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".userinterface.activity.SalesRecordListActivity" />
-        <activity android:name=".userinterface.activity.SalesRecordDetailActivity" />
-        <activity android:name=".userinterface.fragment.StoreDetailFragment"
-         android:theme="@style/MyTheme" ></activity>
+        <activity android:name=".userinterface.activity.SalesRecordListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".userinterface.activity.SalesRecordDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".userinterface.activity.StoreDetailActivity"
+         android:theme="@style/MyTheme"
+            android:screenOrientation="portrait"></activity>
+
 
     </application>
-
 
 </manifest>

@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.preludesys.umg.musicmart.R;
 import com.preludesys.umg.musicmart.model.NavDrawerItem;
+import com.preludesys.umg.musicmart.util.FontHelper;
 
 import java.util.ArrayList;
 
@@ -73,6 +74,7 @@ public class SlidingMenuAdapter extends BaseAdapter {
         NavDrawerItem currentItem = navDrawerItems.get(position);
         holder.imgIcon.setImageResource(currentItem.getIcon());
         holder.txtTitle.setText(currentItem.getTitle());
+        FontHelper.sePaintFlags(holder.txtTitle);
 
         // displaying count
         // check whether it set visible or not

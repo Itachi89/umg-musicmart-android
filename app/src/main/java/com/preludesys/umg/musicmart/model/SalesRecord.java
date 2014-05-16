@@ -8,17 +8,7 @@ import java.util.List;
 public class SalesRecord extends AbstractDomain {
     private static final long serialVersionUID = 694379600452602646L;
 
-    private String artistId;
-    private Integer salesRecordId;
-    private String lwtd;
-    private String rank;
-    private String rtd;
-    private String title;
-    private String wtd;
-    private Integer percentage;
-    private String imageUrl;
-    private String label;
-    private String configId;
+
     private List<Link> links;
 
     public List<Link> getLinks() {
@@ -30,6 +20,20 @@ public class SalesRecord extends AbstractDomain {
     }
 
 
+    private String artistId;
+    private String appleProductId;
+    private Integer salesRecordId;
+    private String lwtd;
+    private String rank;
+    private String rtd;
+    private String title;
+    private String wtd;
+    private Integer percentage;
+    private String imageUrl;
+    private String previewUrl;
+    private String label;
+    private String configId;
+    private String partner;
 
     public String getArtistId() {
         return artistId;
@@ -97,6 +101,23 @@ public class SalesRecord extends AbstractDomain {
     public void setLabel(String label) {
         this.label = label;
     }
-
+    public String getPreviewUrl() {
+        return previewUrl;
+    }
+    public void setPreviewUrl(String previewUrl) {
+        this.previewUrl = previewUrl;
+    }
+    public String getAppleProductId() {
+        return appleProductId;
+    }
+    public void setAppleProductId(String appleProductId) {
+        this.appleProductId = appleProductId;
+    }
+    public String getPartner() {
+        return partner;
+    }
+    public void setPartner(String partner) {
+        this.partner = partner;
+    }
 
 }

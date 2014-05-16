@@ -98,7 +98,7 @@ public class SalesRecordListFragment extends MusicMartFragment implements CallBa
             int currentPosition = listView.getLastVisiblePosition();
             Log.d(this.getClass().toString(),">>>>>>>>>>>>>>>>>> currentPosition: " + currentPosition);
             SalesRecordAdapter salesRecordAdapter = new SalesRecordAdapter(getActivity(),
-                        R.layout.item_view, salesRecordItems, getMusicMartActivity().getMusicMartApplication().getTypeFace());
+                        R.layout.item_view_grid, salesRecordItems, getMusicMartActivity().getMusicMartApplication().getTypeFace());
             listView.setAdapter(salesRecordAdapter);
             newPosition = currentPosition + increment;
             //newPosition=newPosition+20;

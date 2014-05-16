@@ -18,6 +18,7 @@ public class SalesRecordDetail extends SalesRecord {
     private String superLabel;
     private String updatedDate;
     private String wtd;
+    private List<SalesRecordDetail> partnerSalesRecordDetail;
     private List<Link> links;
 
     public List<Link> getLinks() {
@@ -96,4 +97,6 @@ public class SalesRecordDetail extends SalesRecord {
     public void setWtd(String wtd) {
         this.wtd = wtd;
     }
+    public List<SalesRecordDetail> getPartnerSalesRecordDetail() { return partnerSalesRecordDetail; }
+    public void setPartnerSalesRecordDetail(List<SalesRecordDetail> partnerSalesRecordDetail) {this.partnerSalesRecordDetail = partnerSalesRecordDetail;}
 }
